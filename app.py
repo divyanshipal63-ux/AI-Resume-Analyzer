@@ -1,6 +1,25 @@
+import os
 from flask import Flask, jsonify
+from models import db
+from models import User, Resume, Analysis
 
 app = Flask(__name__)
+
+# Database configuration
+os.makedirs(app.instance_path, exist_ok=True)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    "sqlite:///" + os.path.join(app.instance_path, "database.db")
+)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# Initialize database
+db.init_app(app)
+
+# Create database tables
+with app.app_context():
+    db.create_all()
+
 
 @app.route("/")
 def home():
@@ -39,12 +58,14 @@ def home():
     </html>
     """
 
+
 @app.route("/health")
 def health():
     return jsonify({
         "status": "running",
         "project": "AI Resume Analyzer"
     })
+
 
 if __name__ == "__main__":
     app.run(debug=True)
