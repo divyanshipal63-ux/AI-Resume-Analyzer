@@ -1,14 +1,18 @@
 import streamlit as st
 import tempfile
 import os
-
+from home_page import show_home
 from utils import extract_text_from_pdf
 from matcher import calculate_match
 from suggestions import generate_suggestions
 from ats_score import calculate_ats_score
 from gemini_helper import analyze_resume
 
-
+st.set_page_config(
+    page_title="AI Resume Analyzer",
+    page_icon="📄",
+    layout="wide"
+)
 SKILLS = [
     "Python",
     "Java",
@@ -29,12 +33,16 @@ SKILLS = [
 ]
 
 
-st.set_page_config(
-    page_title="AI Resume Analyzer",
-    page_icon="📄",
-    layout="wide"
-)
+# Page Navigation
+if "page" not in st.session_state:
+    st.session_state["page"] = "home"
 
+if st.session_state["page"] == "home":
+    show_home()
+    st.stop()
+if st.button("← Back to Home"):
+    st.session_state["page"] = "home"
+    st.rerun()
 st.title("📄 AI Resume Analyzer")
 st.write("Upload your resume and compare it with a job description.")
 
