@@ -69,7 +69,7 @@ def show_home():
         type="primary",
         use_container_width=True
     ):
-        st.session_state["page"] = "analyzer"
+        st.session_state["page"] = "auth"
         st.rerun()
 
     st.subheader("Everything You Need")
