@@ -3,6 +3,7 @@ import tempfile
 import os
 from home_page import show_home
 from auth_page import show_auth
+from dashboard_page import show_dashboard
 from utils import extract_text_from_pdf
 from matcher import calculate_match
 from suggestions import generate_suggestions
@@ -49,9 +50,15 @@ if not st.session_state.get("logged_in", False):
     st.session_state["page"] = "auth"
     show_auth()
     st.stop()
-if st.button("← Back to Home"):
-    st.session_state["page"] = "home"
+if st.session_state["page"] == "dashboard":
+    show_dashboard()
+    st.stop()
+
+# Analyzer page
+if st.button("← Back to Dashboard"):
+    st.session_state["page"] = "dashboard"
     st.rerun()
+
 st.title("📄 AI Resume Analyzer")
 st.write("Upload your resume and compare it with a job description.")
 
