@@ -122,7 +122,7 @@ def show_auth():
                 elif verify_user(login_email, login_password):
                     st.session_state["logged_in"] = True
                     st.session_state["user_email"] = login_email
-                    st.session_state["page"] = "analyzer"
+                    st.session_state["page"] = "dashboard"
                     st.rerun()
                 else:
                     st.error("Invalid email or password.")
