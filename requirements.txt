@@ -2,7 +2,7 @@ streamlit
 fastapi
 uvicorn
 python-multipart
-PyMuPDF
+pymupdf
 google-generativeai
 scikit-learn
-fitz
+
