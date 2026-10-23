@@ -2,6 +2,7 @@ import streamlit as st
 import tempfile
 import os
 from home_page import show_home
+from auth_page import show_auth
 from utils import extract_text_from_pdf
 from matcher import calculate_match
 from suggestions import generate_suggestions
@@ -39,6 +40,14 @@ if "page" not in st.session_state:
 
 if st.session_state["page"] == "home":
     show_home()
+    st.stop()
+if st.session_state["page"] == "auth":
+    show_auth()
+    st.stop()
+# Protect the Analyzer page
+if not st.session_state.get("logged_in", False):
+    st.session_state["page"] = "auth"
+    show_auth()
     st.stop()
 if st.button("← Back to Home"):
     st.session_state["page"] = "home"
