@@ -34,6 +34,58 @@ SKILLS = [
     "Artificial Intelligence"
 ]
 
+# Page 4 Styling - Red & White Theme
+st.markdown("""
+<style>
+.stApp {
+    background-color: #FFF8F8;
+}
+
+.block-container {
+    max-width: 1150px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+div[data-testid="stFileUploader"] {
+    background-color: #FFFFFF;
+    border: 1px dashed #E57373;
+    border-radius: 14px;
+    padding: 15px;
+}
+
+div[data-testid="stTextArea"] textarea {
+    border-radius: 12px;
+    border: 1px solid #E5B4B4;
+}
+
+div.stButton > button[kind="primary"] {
+    background-color: #C62828;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    min-height: 45px;
+    font-weight: 600;
+}
+
+div.stButton > button[kind="primary"]:hover {
+    background-color: #991B1B;
+    color: white;
+}
+
+div[data-testid="stMetric"] {
+    background-color: #FFFFFF;
+    border: 1px solid #F1D0D0;
+    padding: 18px;
+    border-radius: 14px;
+}
+
+hr {
+    border-color: #F1D0D0;
+}
+</style>
+""", unsafe_allow_html=True)
+
 
 # Page Navigation
 if "page" not in st.session_state:
