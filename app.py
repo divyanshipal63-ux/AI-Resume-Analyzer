@@ -110,6 +110,18 @@ if st.session_state["page"] == "report":
     show_report_page()
     st.stop()
 # Analyzer page
+if st.session_state.get("analysis_complete", False):
+    st.info("Your resume analysis is saved.")
+    if st.button("📑 View Detailed Report", type="primary"):
+        st.session_state["page"] = "report"
+        st.rerun()
+
+    if st.button("🔄 Analyze Another Resume"):
+        st.session_state["analysis_complete"] = False
+        st.session_state["page"] = "analyzer"
+        st.rerun()
+
+
 if st.button("← Back to Dashboard"):
     st.session_state["page"] = "dashboard"
     st.rerun()
@@ -216,7 +228,7 @@ if st.button("🔍 Analyze Resume", type="primary"):
                         else str(ai_analysis)
                     ),
                 }
-      
+                st.session_state["analysis_complete"] = True
 
                 # -------------------------
                 # RESULTS
@@ -300,9 +312,6 @@ if st.button("🔍 Analyze Resume", type="primary"):
                     st.write(ai_analysis)
                 st.divider()
 
-                if st.button("📑 View Detailed Report", type="primary"):
-                    st.session_state["page"] = "report"
-                    st.rerun()
             except Exception as e:
                 st.error(f"Something went wrong: {e}")
 
