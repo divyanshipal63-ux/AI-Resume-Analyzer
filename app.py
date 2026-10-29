@@ -110,16 +110,7 @@ if st.session_state["page"] == "report":
     show_report_page()
     st.stop()
 # Analyzer page
-if st.session_state.get("analysis_complete", False):
-    st.info("Your resume analysis is saved.")
-    if st.button("📑 View Detailed Report", type="primary"):
-        st.session_state["page"] = "report"
-        st.rerun()
 
-    if st.button("🔄 Analyze Another Resume"):
-        st.session_state["analysis_complete"] = False
-        st.session_state["page"] = "analyzer"
-        st.rerun()
 
 
 if st.button("← Back to Dashboard"):
@@ -143,7 +134,10 @@ job_description = st.text_area(
     height=200,
     placeholder="Paste the job description here..."
 )
-
+if st.session_state.get("resume_report"):
+    if st.button("📑 View Detailed Report", type="primary"):
+        st.session_state["page"] = "report"
+        st.rerun()
 # Analyze Button
 if st.button("🔍 Analyze Resume", type="primary"):
 
