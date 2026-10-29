@@ -9,7 +9,7 @@ from matcher import calculate_match
 from suggestions import generate_suggestions
 from ats_score import calculate_ats_score
 from gemini_helper import analyze_resume
-
+from report_page import show_report_page
 st.set_page_config(
     page_title="AI Resume Analyzer",
     page_icon="📄",
@@ -105,7 +105,10 @@ if not st.session_state.get("logged_in", False):
 if st.session_state["page"] == "dashboard":
     show_dashboard()
     st.stop()
-
+# Page 5: Detailed Resume Report
+if st.session_state["page"] == "report":
+    show_report_page()
+    st.stop()
 # Analyzer page
 if st.button("← Back to Dashboard"):
     st.session_state["page"] = "dashboard"
