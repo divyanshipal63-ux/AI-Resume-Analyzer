@@ -202,6 +202,21 @@ if st.button("🔍 Analyze Resume", type="primary"):
                     text,
                     job_description
                 )
+                # Save results for the Detailed Report page          
+                st.session_state["resume_report"] = {
+                    "ats_score": ats_score,
+                    "match_score": match_score,
+                    "found_skills": found_skills,
+                    "missing_skills": missing_skills,
+                    "suggestions": suggestions,
+                    "ai_analysis": ai_analysis,
+                    "summary": (
+                        ai_analysis.get("summary", "")
+                        if isinstance(ai_analysis, dict)
+                        else str(ai_analysis)
+                    ),
+                }
+      
 
                 # -------------------------
                 # RESULTS
@@ -283,7 +298,11 @@ if st.button("🔍 Analyze Resume", type="primary"):
 
                 else:
                     st.write(ai_analysis)
+                st.divider()
 
+                if st.button("📑 View Detailed Report", type="primary"):
+                    st.session_state["page"] = "report"
+                    st.rerun()
             except Exception as e:
                 st.error(f"Something went wrong: {e}")
 
