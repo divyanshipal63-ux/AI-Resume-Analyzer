@@ -134,10 +134,15 @@ job_description = st.text_area(
     height=200,
     placeholder="Paste the job description here..."
 )
-if st.session_state.get("resume_report"):
-    if st.button("📑 View Detailed Report", type="primary"):
+st.divider()
+st.subheader("📑 Detailed Resume Report")
+
+if st.button("📑 View Detailed Report", type="primary"):
+    if st.session_state.get("resume_report"):
         st.session_state["page"] = "report"
         st.rerun()
+    else:
+        st.warning("Please analyze your resume first.")
 # Analyze Button
 if st.button("🔍 Analyze Resume", type="primary"):
 
